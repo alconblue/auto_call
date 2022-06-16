@@ -14,9 +14,8 @@ def create_app():
 
 	@app.route('/', methods=['GET'])
 	def serve():
-		print(app.static_folder)
 		try:
-			print(send_from_directory(app.static_folder, 'index.html'))
+			return send_from_directory(app.static_folder, 'index.html')
 		except Exception as e:
 			print(e)
 		return send_from_directory(app.static_folder, 'index.html')
@@ -27,7 +26,6 @@ def create_app():
 		resp = VoiceResponse()
 		resp.say(json['message'])
 		ph_no = json['ph_no']
-		print(request)
 		if ph_no[0] == '+' and ph_no[1:].isnumeric():
 			try:
 				client.calls.create(twiml=str(resp), to=ph_no, from_=app.config.get("TWILIO_FROM_NUMBER"))
