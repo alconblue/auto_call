@@ -5,7 +5,7 @@ from flask_cors import cross_origin
 from flask_cors import CORS
 
 def create_app():
-	app = Flask(__name__)
+	app = Flask(__name__, static_folder='frontend/build')
 	CORS(app)
 
 	app.config.from_pyfile('settings.py')
