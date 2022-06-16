@@ -1,0 +1,5 @@
+from os import environ
+
+TWILIO_ACCOUNT_SID = environ.get('TWILIO_ACCOUNT_SID')
+TWILIO_AUTH_TOKEN = environ.get('TWILIO_AUTH_TOKEN')
+TWILIO_FROM_NUMBER = environ.get('TWILIO_FROM_NUMBER')
