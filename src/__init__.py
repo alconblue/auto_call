@@ -1,15 +1,20 @@
 from flask import Flask, request
+from flask.helpers import send_from_directory
 from twilio.rest import Client
 from twilio.twiml.voice_response import VoiceResponse
 from flask_cors import cross_origin
 from flask_cors import CORS
 
 def create_app():
-	app = Flask(__name__, static_folder='frontend/build')
+	app = Flask(__name__, static_folder='frontend/build', static_url_path='')
 	CORS(app)
 
 	app.config.from_pyfile('settings.py')
 	client = Client(app.config.get('TWILIO_ACCOUNT_SID'), app.config.get('TWILIO_AUTH_TOKEN'))
+
+	@app.route('/', methods=['GET'])
+	def serve():
+		return send_from_directory(app.static_folder, 'index.html')
 
 	@app.route('/call', methods=['POST'])
 	def call():
