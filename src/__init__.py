@@ -11,10 +11,6 @@ def create_app():
 	app.config.from_pyfile('settings.py')
 	client = Client(app.config.get('TWILIO_ACCOUNT_SID'), app.config.get('TWILIO_AUTH_TOKEN'))
 
-	@app.route('/')
-	def index():
-		return f'Account SID = { app.config.get("TWILIO_ACCOUNT_SID") }'
-
 	@app.route('/call', methods=['POST'])
 	def call():
 		json = request.get_json(force=True)
