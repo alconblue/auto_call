@@ -14,6 +14,11 @@ def create_app():
 
 	@app.route('/', methods=['GET'])
 	def serve():
+		print(app.static_folder)
+		try:
+			print(send_from_directory(app.static_folder, 'index.html'))
+		except Exception as e:
+			print(e)
 		return send_from_directory(app.static_folder, 'index.html')
 
 	@app.route('/call', methods=['POST'])
